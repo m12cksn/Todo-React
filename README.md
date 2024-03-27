@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 # Todo-React
 
-## [LIVE DEMO](todo-react-dpxcnw0li-m12cksns-projects.vercel.app)
+- [LIVE DEMO](todo-react-dpxcnw0li-m12cksns-projects.vercel.app)
