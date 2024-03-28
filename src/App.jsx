@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import UserTable from "./Tables/UserTable";
-import AddForm from "./Form/AddForm";
+import AddForm from "./components/Form/AddForm";
+import SelectOption from "./components/selectOption";
+import UserTable from "./components/Tables/UserTable";
 
 const App = () => {
   const taskData = [
@@ -16,6 +17,15 @@ const App = () => {
   };
 
   const [tasks, setTasks] = useState(taskData);
+  const [selectedOption, setSelectedOption] = useState("all");
+
+  const filteredTasks = tasks.filter((task) => {
+    if (selectedOption === "all") {
+      return true;
+    } else {
+      return task.status === selectedOption;
+    }
+  });
 
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -34,17 +44,18 @@ const App = () => {
         <div className="text-center py-5 text-2xl">
           <h1 className="text-white mb-3 font-bold">Add New Todo</h1>
           <AddForm addTask={addTask} />
+          <SelectOption setSelectedOption={setSelectedOption} />
         </div>
         <div className="py-5">
           <h1 className="text-center mb-3 text-2xl text-white font-bold">
             Todos
           </h1>
-          <UserTable
-            tasks={tasks}
-            toogleStatus={toogleStatus}
-            deleteTask={deleteTask}
-          />
         </div>
+        <UserTable
+          tasks={filteredTasks}
+          toogleStatus={toogleStatus}
+          deleteTask={deleteTask}
+        />
       </div>
     </div>
   );
